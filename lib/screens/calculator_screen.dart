@@ -1,11 +1,17 @@
-import 'package:calculadora/widgets/results.dart';
 import 'package:flutter/material.dart';
+
+import 'package:calculadora/bloc/calculator/calculator_bloc.dart';
+import 'package:calculadora/widgets/results.dart';
 import 'package:calculadora/widgets/calc_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CalculatorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final calculatorBloc = BlocProvider.of<CalculatorBloc>(context);
+    
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -18,14 +24,13 @@ class CalculatorScreen extends StatelessWidget {
               ),
 
               Results(),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CalculatorButton( 
                     text: 'AC',
                     bgColor: Color(0xffA5A5A5 ),
-                    onPressed: () => print('AC'),
+                    onPressed: () => calculatorBloc.add(ResetAc(""))
                   ),
                   CalculatorButton( 
                     text: '+/-',

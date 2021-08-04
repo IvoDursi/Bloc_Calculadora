@@ -13,6 +13,22 @@ class CalculatorBloc extends Bloc<CalculatorEvent, CalculatorState> {
   Stream<CalculatorState> mapEventToState(
     CalculatorEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if(event is ResetAc) {
+      yield CalculatorState(
+        firstNumber: "0",
+        mathResult: "0",
+        secondNumber: "0",
+        operation: "none"
+      );
+    } else if(event is AddNumber){
+      yield CalculatorState(
+        firstNumber: "0",
+        secondNumber: "0",
+        operation: "none",
+        mathResult: (state.mathResult == "0") 
+        ? event.number 
+        : state.mathResult + event.number
+      );
+    }
   }
 }
